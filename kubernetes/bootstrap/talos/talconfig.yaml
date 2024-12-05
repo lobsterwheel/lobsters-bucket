@@ -25,16 +25,16 @@ cniConfig:
 
 nodes:
   - hostname: "talos-prox-0"
-    ipAddress: "10.69.0.3"
+    ipAddress: "10.69.0.2"
     installDisk: "/dev/sda1"
-    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
+    talosImageURL: factory.talos.dev/installer/b01eec6ed57595da44b58f0df0a2b4fb8ffa4c533d6506827a2c5288061cf251
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "bc:24:11:86:92:a3"
         dhcp: false
         addresses:
-          - "10.69.0.3/24"
+          - "10.69.0.2/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "10.69.0.1"
@@ -42,13 +42,28 @@ nodes:
         vip:
           ip: "10.69.0.49"
   - hostname: "talos-worker-0"
-    ipAddress: "10.69.0.4"
+    ipAddress: "10.69.0.3"
     installDisk: "/dev/sda1"
-    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
+    talosImageURL: factory.talos.dev/installer/b01eec6ed57595da44b58f0df0a2b4fb8ffa4c533d6506827a2c5288061cf251
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "bc:24:11:27:af:29"
+        dhcp: false
+        addresses:
+          - "10.69.0.3/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "10.69.0.1"
+        mtu: 1500
+  - hostname: "talos-worker-1"
+    ipAddress: "10.69.0.4"
+    installDisk: "/dev/sda1"
+    talosImageURL: factory.talos.dev/installer/b01eec6ed57595da44b58f0df0a2b4fb8ffa4c533d6506827a2c5288061cf251
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "bc:24:11:31:d1:dc"
         dhcp: false
         addresses:
           - "10.69.0.4/24"
@@ -56,32 +71,17 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "10.69.0.1"
         mtu: 1500
-  - hostname: "talos-worker-1"
+  - hostname: "talos-worker-2"
     ipAddress: "10.69.0.5"
     installDisk: "/dev/sda1"
-    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
-    controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "bc:24:11:31:d1:dc"
-        dhcp: false
-        addresses:
-          - "10.69.0.5/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "10.69.0.1"
-        mtu: 1500
-  - hostname: "talos-worker-2"
-    ipAddress: "10.69.0.6"
-    installDisk: "/dev/sda1"
-    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
+    talosImageURL: factory.talos.dev/installer/b01eec6ed57595da44b58f0df0a2b4fb8ffa4c533d6506827a2c5288061cf251
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "bc:24:11:61:f8:ee"
         dhcp: false
         addresses:
-          - "10.69.0.6/24"
+          - "10.69.0.5/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "10.69.0.1"
