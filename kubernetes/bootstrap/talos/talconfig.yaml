@@ -26,7 +26,7 @@ cniConfig:
 nodes:
   - hostname: "talos-prox-0"
     ipAddress: "10.69.0.2"
-    installDisk: "/dev/sda1"
+    installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/b01eec6ed57595da44b58f0df0a2b4fb8ffa4c533d6506827a2c5288061cf251
     controlPlane: true
     networkInterfaces:
@@ -43,7 +43,7 @@ nodes:
           ip: "10.69.0.49"
   - hostname: "talos-worker-0"
     ipAddress: "10.69.0.3"
-    installDisk: "/dev/sda1"
+    installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/b01eec6ed57595da44b58f0df0a2b4fb8ffa4c533d6506827a2c5288061cf251
     controlPlane: false
     networkInterfaces:
@@ -58,7 +58,7 @@ nodes:
         mtu: 1500
   - hostname: "talos-worker-1"
     ipAddress: "10.69.0.4"
-    installDisk: "/dev/sda1"
+    installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/b01eec6ed57595da44b58f0df0a2b4fb8ffa4c533d6506827a2c5288061cf251
     controlPlane: false
     networkInterfaces:
@@ -73,7 +73,7 @@ nodes:
         mtu: 1500
   - hostname: "talos-worker-2"
     ipAddress: "10.69.0.5"
-    installDisk: "/dev/sda1"
+    installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/b01eec6ed57595da44b58f0df0a2b4fb8ffa4c533d6506827a2c5288061cf251
     controlPlane: false
     networkInterfaces:
