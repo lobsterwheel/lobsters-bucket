@@ -38,11 +38,10 @@ spec:
             http:
               port: 8000
       ingress:
-        app:
-          ingressClassName: external
-          annotations:
-            external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          annotations:
-          hosts:
-            - "dash.${SECRET_DOMAIN}"
-          path: /
+        enabled: true
+        ingressClassName: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - "dash.${SECRET_DOMAIN}"
+        path: /
