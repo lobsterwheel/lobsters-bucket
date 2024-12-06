@@ -31,15 +31,15 @@ spec:
       - --enable-skip-login
       - --disable-settings-authorizer
     ingress:
-      enabled: true
-      className: external
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "dash.${SECRET_DOMAIN}"
-      annotations:
-      hosts:
-        - host: "dash.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              service:
-                identifier: app
-                port: http
+      app:
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "dash.${SECRET_DOMAIN}"
+        annotations:
+        hosts:
+          - host: "dash.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
