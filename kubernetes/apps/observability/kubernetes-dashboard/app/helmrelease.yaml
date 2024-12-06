@@ -30,6 +30,12 @@ spec:
       - --enable-insecure-login
       - --enable-skip-login
       - --disable-settings-authorizer
+    service:
+      app:
+        controller: kubernetes-dashboard
+        ports:
+          http:
+            port: 8000
     ingress:
       app:
         className: external
