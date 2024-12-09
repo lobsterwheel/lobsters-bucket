@@ -35,19 +35,6 @@ spec:
               - 568
               - 1000
               - 10000
-          nodeSelector:
-            graphics: dri
-            longhorn: primary
-          affinity:
-            podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - topologyKey: "kubernetes.io/hostname"
-                  labelSelector:
-                    matchExpressions:
-                      - key: app.kubernetes.io/name
-                        operator: In
-                        values:
-                          - "plex"
 
         containers:
           &ui tdarr-app:
