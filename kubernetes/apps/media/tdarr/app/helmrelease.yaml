@@ -1,0 +1,119 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.5.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app tdarr
+  namespace: default
+spec:
+  releaseName: *app
+  targetNamespace: media
+  timeout: 2m
+  interval: 2m0s
+  chart:
+    spec:
+      chart: app-template
+      version: "3.5.1"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      *app :
+        type: statefulset
+        pod:
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 100
+            fsGroupChangePolicy: "OnRootMismatch"
+            supplementalGroups:
+              - 44 # video
+              - 125 # render
+              - 105 # render
+              - 568
+              - 1000
+              - 10000
+          nodeSelector:
+            graphics: dri
+            longhorn: primary
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - "plex"
+
+        containers:
+          &ui tdarr-app:
+            image:
+              repository: ghcr.io/haveagitgat/tdarr
+              tag: "2.27.02"
+          &node tdarr-node:
+            image:
+              repository: ghcr.io/haveagitgat/tdarr_node
+              tag: "2.27.02"
+            env:
+              - name: nodeID
+                value: node
+              - name: serverIP
+                value: 127.0.0.1
+              - name: serverPort
+                value: "8266"
+            securityContext:
+              privileged: true
+
+    persistence:
+      config:
+        existingClaim: tdarr-longhorn-webapp
+        advancedMounts:
+          *app :
+            *ui : &paths
+              - path: /app/configs
+                subPath: config
+              - path: /app/server
+                subPath: server
+            *node : *paths
+      nfs-media:
+        type: nfs
+        server: nfs.${SECRET_DOMAIN}
+        path: /storage/media
+        globalMounts:
+          - path: /media/
+      transcode:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 20Gi
+      dri:
+        type: hostPath
+        hostPath: /dev/dri
+
+    service:
+      app:
+        nameOverride: tdarr
+        controller: *app
+        ports:
+          http:
+            port: 8265
+          server:
+            enabled: true
+            protocol: TCP
+            port: 8266
+
+    ingress:
+      app:
+        className: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "tdarr.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http

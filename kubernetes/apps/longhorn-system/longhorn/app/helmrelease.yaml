@@ -24,7 +24,5 @@ spec:
       replicas: 1
     ingress:
       enabled: true
-      ingressClassName: external
-      host: longhorn.${SECRET_DOMAIN}
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+      ingressClassName: internal
+      host: longhorn.internal.${SECRET_DOMAIN}
