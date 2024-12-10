@@ -68,7 +68,7 @@ spec:
             *node : *paths
       nfs-media:
         type: nfs
-        server: nfs.${SECRET_DOMAIN}
+        server: hetzner.${SECRET_DOMAIN}
         path: /storage/media
         globalMounts:
           - path: /media/
