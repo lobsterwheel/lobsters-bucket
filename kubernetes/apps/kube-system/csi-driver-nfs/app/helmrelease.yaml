@@ -29,11 +29,12 @@ spec:
       create: true
       name: nfs
       parameters:
-        server: nfs.${SECRET_DOMAIN}
+        server: hetzner.${SECRET_DOMAIN}
         share: /storage/
       mountOptions:
         - nfsvers=4.2
         - nconnect=16
+        - rw
         - hard
         - noatime
       reclaimPolicy: Delete
