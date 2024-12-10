@@ -18,3 +18,4 @@ resources:
   - ./kubernetes-dashboard.yaml
   - ./longhorn.yaml
   - ./csi-driver-nfs.yaml
+  - ./external-secrets.yaml
