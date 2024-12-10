@@ -73,9 +73,9 @@ spec:
         globalMounts:
           - path: /media/
       transcode:
-        type: emptyDir
-        medium: Memory
-        sizeLimit: 20Gi
+        existingClaim: tdarr-longhorn-cache
+        globalMounts:
+          - path: /transcode/
       dri:
         type: hostPath
         hostPath: /dev/dri
