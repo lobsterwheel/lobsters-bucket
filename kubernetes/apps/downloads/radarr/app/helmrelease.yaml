@@ -106,7 +106,7 @@ spec:
         type: emptyDir
       media:
         type: nfs
-        server: nfs.${SECRET_DOMAIN}
+        server: hetzner.${SECRET_DOMAIN}
         path: /storage
         globalMounts:
           - path: /media
