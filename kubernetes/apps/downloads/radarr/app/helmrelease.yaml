@@ -109,4 +109,4 @@ spec:
         server: nfs.${SECRET_DOMAIN}
         path: /storage
         globalMounts:
-          - path: /data
+          - path: /media
