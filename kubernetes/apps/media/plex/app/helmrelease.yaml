@@ -76,12 +76,16 @@ spec:
                   port: http
     persistence:
       config:
-        type: nfs
-        server: hetzner.${SECRET_DOMAIN}
-        path: /storage/configs/plex/
-        globalMounts:
-         - path: /config
-           readOnly: false
+        type: custom
+        volumeSpec:
+          csi:
+            driver: nfs.csi.k8s.io
+            volumeAttributes:
+              server: hetzner.${SECRET_DOMAIN}
+              share: /storage/configs/plex/
+              mountOptions: "nfsvers=4.9,rw"
+            readOnly: false
+            mountPath: "/config"
       media:
         type: nfs
         server: hetzner.${SECRET_DOMAIN}
