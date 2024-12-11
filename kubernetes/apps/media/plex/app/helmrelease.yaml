@@ -76,12 +76,11 @@ spec:
                   port: http
     persistence:
       config:
-        enabled: true
-        existingClaim: plex-config
-        advancedMounts:
-          main:
-            main:
-              - path: /config
+        type: nfs
+        server: hetzner.${SECRET_DOMAIN}
+        path: /storage/configs/plex/
+        globalMounts:
+         - path: /data
       media:
         type: nfs
         server: hetzner.${SECRET_DOMAIN}
