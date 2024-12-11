@@ -81,6 +81,7 @@ spec:
         path: /storage/configs/plex/
         globalMounts:
          - path: /config
+           readOnly: false
       media:
         type: nfs
         server: hetzner.${SECRET_DOMAIN}
@@ -93,3 +94,4 @@ spec:
           main:
             main:
               - path: /transcode
+                readOnly: false
