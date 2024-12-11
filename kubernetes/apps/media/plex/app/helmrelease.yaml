@@ -92,4 +92,4 @@ spec:
         advancedMounts:
           main:
             main:
-              - path: /config/Library/Application Support/Plex Media Server/Cache
+              - path: /transcode
