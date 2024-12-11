@@ -6,7 +6,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 50Gi
+      storage: 30Gi
   volumeMode: Filesystem
   storageClassName: longhorn-webapp
   accessModes:
