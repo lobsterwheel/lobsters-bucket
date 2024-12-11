@@ -78,14 +78,12 @@ spec:
       config:
         type: custom
         volumeSpec:
-          csi:
-            driver: nfs.csi.k8s.io
-            volumeAttributes:
-              server: hetzner.${SECRET_DOMAIN}
-              share: /storage/configs/plex/
-              mountOptions: "nfsvers=4.9,rw"
-            readOnly: false
-            mountPath: "/config"
+          nfs:
+            server: hetzner.${SECRET_DOMAIN}
+            path: /storage/configs/plex/
+          readOnly: false
+        globalMounts:
+            - /config
       media:
         type: nfs
         server: hetzner.${SECRET_DOMAIN}
