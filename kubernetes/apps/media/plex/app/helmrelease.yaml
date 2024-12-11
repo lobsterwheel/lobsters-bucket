@@ -88,10 +88,6 @@ spec:
         globalMounts:
           - path: /data
       transcode:
-        type: emptyDir
-        globalMounts:
-          - path: /transcode
-      plex-cache:
         existingClaim: plex-cache
         advancedMounts:
           main:
