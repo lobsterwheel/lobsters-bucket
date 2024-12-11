@@ -76,20 +76,13 @@ spec:
                   port: http
     persistence:
       config:
-        type: custom
-        volumeSpec:
-          nfs:
-            server: hetzner.${SECRET_DOMAIN}
-            share: /storage/configs/plex/
-          readOnly: false
-        globalMounts:
-            - /config
+        type: nfs
+        server: hetzner.${SECRET_DOMAIN}
+        path: /storage/configs/plex
       media:
         type: nfs
         server: hetzner.${SECRET_DOMAIN}
         path: /storage/media
-        globalMounts:
-          - path: /data
       transcode:
         existingClaim: plex-cache
         advancedMounts:
