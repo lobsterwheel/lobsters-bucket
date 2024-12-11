@@ -80,7 +80,7 @@ spec:
         server: hetzner.${SECRET_DOMAIN}
         path: /storage/configs/plex/
         globalMounts:
-         - path: /data
+         - path: /config
       media:
         type: nfs
         server: hetzner.${SECRET_DOMAIN}
