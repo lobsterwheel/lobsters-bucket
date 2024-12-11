@@ -36,7 +36,7 @@ spec:
             runAsGroup: 2000
             runAsNonRoot: true
             fsGroup: 2000
-            fsGroupChangePolicy: always
+            fsGroupChangePolicy: Always
         containers:
           main:
             image:
